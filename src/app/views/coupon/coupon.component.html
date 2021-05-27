@@ -1,0 +1,532 @@
+<div class="app-body">
+  <div class="container">
+    <div class="row card custom" style="border-width: 0px">
+      <div class="col-md-8 mx-auto">
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+              <form
+                [formGroup]="formData"
+                autocomplete="off"
+                class="example-form"
+              >
+                <h1>Apply Coupon</h1>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <mat-form-field
+                      appearance="fill"
+                      class="example-full-width"
+                    >
+                      <mat-label>Coupon Type*</mat-label>
+                      <mat-select formControlName="couponType">
+                        <mat-option
+                          *ngFor="let coupon of couponType"
+                          [value]="coupon['value']"
+                        >
+                          {{ coupon["label"] }}
+                        </mat-option>
+                      </mat-select>
+                      <span
+                        class="
+                          glyphicon glyphicon-envelope
+                          form-control-feedback
+                        "
+                      ></span>
+                      <ng-container
+                        *ngIf="isControllvalid(formData.controls['couponType'])"
+                      >
+                        <span
+                          class="error text-danger"
+                          *ngIf="formData.controls.couponType.errors?.required"
+                          >This field is required</span
+                        >
+                      </ng-container>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Coupon Code*</mat-label>
+                      <input
+                        type="text"
+                        matInput
+                        formControlName="couponCode"
+                      />
+                      <span
+                        class="
+                          glyphicon glyphicon-envelope
+                          form-control-feedback
+                        "
+                      ></span>
+                      <ng-container
+                        *ngIf="isControllvalid(formData.controls['couponCode'])"
+                      >
+                        <span
+                          class="error text-danger"
+                          *ngIf="formData.controls.couponCode.errors?.required"
+                          >This field is required</span
+                        >
+                        <span
+                          class="error text-danger"
+                          *ngIf="
+                            formData.controls.couponCode.errors?.rangeLength
+                          "
+                          >Please enter a value between 3 and 55 characters
+                          long.
+                        </span>
+                      </ng-container>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Coupon Count*</mat-label>
+                      <input
+                        type="text"
+                        matInput
+                        formControlName="couponCount"
+                        placeholder="Count"
+                      />
+                      <span
+                        class="
+                          glyphicon glyphicon-envelope
+                          form-control-feedback
+                        "
+                      ></span>
+                      <ng-container
+                        *ngIf="
+                          isControllvalid(formData.controls['couponCount'])
+                        "
+                      >
+                        <span
+                          class="error text-danger"
+                          *ngIf="formData.controls.couponCount.errors?.required"
+                          >This field is required</span
+                        >
+                        <span
+                          class="error text-danger"
+                          *ngIf="formData.controls.couponCount.errors?.number"
+                          >Please enter a numeric value.
+                        </span>
+                      </ng-container>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-12 row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Start date</label>
+                      <input
+                        matInput
+                        [matDatepicker]="picker1"
+                        readonly
+                        name="from"
+                        placeholder="dd/mm/yyyy"
+                        formControlName="startDate"
+                        class="form-control"
+                        (click)="picker1.open()"
+                      />
+                      <mat-datepicker-toggle
+                        [hidden]="true"
+                        matSuffix
+                        [for]="picker1"
+                        class="fas fa-calendar-alt"
+                        style="pointer-events: none"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                      <span
+                        style="pointer-events: none"
+                        class="
+                          glyphicon glyphicon-envelope
+                          form-control-feedback
+                        "
+                      ></span>
+                      <ng-container
+                        *ngIf="isControllvalid(formData.controls['startDate'])"
+                      >
+                        <span
+                          class="error text-danger"
+                          *ngIf="formData.controls.startDate.errors.required"
+                          >This field is required</span
+                        >
+                      </ng-container>
+                      <span
+                        class="error text-danger"
+                        *ngIf="
+                          !(
+                            formData.controls['startDate'].errors &&
+                            formData.controls['startDate'].errors.required
+                          ) &&
+                          formData.errors &&
+                          formData.errors != null &&
+                          formData.errors.dateLessCurrentDate
+                        "
+                        >Date must be in the future</span
+                      >
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">End date</label>
+                      <div class="sche-in">
+                        <input
+                          matInput
+                          [matDatepicker]="picker2"
+                          name="from"
+                          placeholder="dd/mm/yyyy"
+                          formControlName="endDate"
+                          class="form-control"
+                          (click)="picker2.open()"
+                        />
+
+                        <mat-datepicker-toggle
+                          [hidden]="true"
+                          matSuffix
+                          [for]="picker2"
+                          class="fas fa-calendar-alt"
+                          style="pointer-events: none"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <span
+                          style="pointer-events: none"
+                          class="
+                            glyphicon glyphicon-envelope
+                            form-control-feedback
+                          "
+                        ></span>
+                        <ng-container
+                          *ngIf="isControllvalid(formData.controls['endDate'])"
+                        >
+                          <span
+                            class="error text-danger"
+                            *ngIf="formData.controls.endDate.errors.required"
+                            >This field is required</span
+                          >
+                        </ng-container>
+                        <span
+                          class="error text-danger"
+                          *ngIf="
+                            !(
+                              formData.controls['endDate'].errors &&
+                              formData.controls['endDate'].errors.required
+                            ) &&
+                            formData.errors &&
+                            formData.errors != null &&
+                            formData.errors.dateNotGreaterThan
+                          "
+                          >End date should be greater than start date</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <mat-form-field
+                      appearance="fill"
+                      class="example-full-width"
+                    >
+                      <mat-label>Coupon Availability*</mat-label>
+                      <mat-select formControlName="availability">
+                        <mat-option
+                          *ngFor="let ele of availability"
+                          [value]="ele['value']"
+                        >
+                          {{ ele["label"] }}
+                        </mat-option>
+                      </mat-select>
+                      <span
+                        style="pointer-events: none"
+                        class="
+                          glyphicon glyphicon-envelope
+                          form-control-feedback
+                        "
+                      ></span>
+                      <ng-container
+                        *ngIf="
+                          isControllvalid(formData.controls['availability'])
+                        "
+                      >
+                        <span
+                          class="error text-danger"
+                          *ngIf="formData.controls.availability.errors.required"
+                          >This field is required</span
+                        >
+                      </ng-container>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <angular-editor
+                      placeholder="Enter Content"
+                      [config]="editorConfig"
+                      formControlName="htmlContent"
+                      minlength="3"
+                      name="content"
+                    ></angular-editor>
+                    <span
+                      style="pointer-events: none"
+                      class="glyphicon glyphicon-envelope form-control-feedback"
+                    ></span>
+                    <ng-container
+                      *ngIf="isControllvalid(formData.controls['htmlContent'])"
+                    >
+                      <span
+                        class="error text-danger"
+                        *ngIf="formData.controls.htmlContent.errors.required"
+                        >This field is required</span
+                      >
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <mat-form-field
+                      appearance="fill"
+                      class="example-full-width"
+                    >
+                      <mat-label>Coupon Status*</mat-label>
+                      <mat-select formControlName="status">
+                        <mat-option
+                          *ngFor="let ele of couponStatus"
+                          [value]="ele['value']"
+                        >
+                          {{ ele["label"] }}
+                        </mat-option>
+                      </mat-select>
+                      <span
+                        style="pointer-events: none"
+                        class="
+                          glyphicon glyphicon-envelope
+                          form-control-feedback
+                        "
+                      ></span>
+                      <ng-container
+                        *ngIf="isControllvalid(formData.controls['status'])"
+                      >
+                        <span
+                          class="error text-danger"
+                          *ngIf="formData.controls.status.errors.required"
+                          >This field is required</span
+                        >
+                      </ng-container>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <mat-label class="label-rule">Coupon Rules*</mat-label>
+                  <div
+                    class="card"
+                    formArrayName="rules"
+                    style="border-width: 0px"
+                  >
+                    <div
+                      *ngFor="
+                        let item of rules.controls;
+                        let pointIndex = index
+                      "
+                      [formGroupName]="pointIndex"
+                      class="card-rule"
+                    >
+                      <div class="card-header">Rule</div>
+                      <button
+                        type="button"
+                        class="remove"
+                        (click)="removeRules(pointIndex)"
+                      >
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      </button>
+
+                      <div class="row card-padding">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Min Amount*</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                formControlName="minAmount"
+                              />
+                              <span
+                                style="pointer-events: none"
+                                class="
+                                  glyphicon glyphicon-envelope
+                                  form-control-feedback
+                                "
+                              ></span>
+                              <ng-container
+                                *ngIf="
+                                  isRuleControllValid(item.get('minAmount'))
+                                "
+                              >
+                                <span
+                                  class="error text-danger"
+                                  *ngIf="item.get('minAmount').errors?.required"
+                                  >This field is required</span
+                                >
+                                <span
+                                  class="error text-danger"
+                                  *ngIf="item.get('minAmount').errors?.number"
+                                  >Please enter a numeric value.
+                                </span>
+                              </ng-container>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Max Amount</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                formControlName="maxAmount"
+                              />
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <mat-form-field
+                              appearance="fill"
+                              class="example-full-width"
+                            >
+                              <mat-label>Disscount Type*</mat-label>
+                              <mat-select formControlName="disscountType">
+                                <mat-option
+                                  *ngFor="let ele of disscountType"
+                                  [value]="ele['value']"
+                                >
+                                  {{ ele["label"] }}
+                                </mat-option>
+                              </mat-select>
+                              <span
+                                style="pointer-events: none"
+                                class="
+                                  glyphicon glyphicon-envelope
+                                  form-control-feedback
+                                "
+                              ></span>
+                              <ng-container
+                                *ngIf="
+                                  isRuleControllValid(item.get('disscountType'))
+                                "
+                              >
+                                <span
+                                  class="error text-danger"
+                                  *ngIf="
+                                    item.get('disscountType').errors?.required
+                                  "
+                                  >This field is required</span
+                                >
+                              </ng-container>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Disscount Amount*</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                formControlName="disscount"
+                              />
+                              <span
+                                style="pointer-events: none"
+                                class="
+                                  glyphicon glyphicon-envelope
+                                  form-control-feedback
+                                "
+                              ></span>
+                              <ng-container
+                                *ngIf="
+                                  isRuleControllValid(item.get('disscount'))
+                                "
+                              >
+                                <span
+                                  class="error text-danger"
+                                  *ngIf="item.get('disscount').errors?.required"
+                                  >This field is required</span
+                                >
+                                <span
+                                  class="error text-danger"
+                                  *ngIf="item.get('disscount').errors?.number"
+                                  >Please enter a numeric value.
+                                </span>
+                              </ng-container>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                              <mat-label>Max Disscount Amount</mat-label>
+                              <input
+                                type="text"
+                                matInput
+                                formControlName="maxDisscount"
+                                placeholder="Amount"
+                              />
+                              <span
+                                style="pointer-events: none"
+                                class="
+                                  glyphicon glyphicon-envelope
+                                  form-control-feedback
+                                "
+                              ></span>
+                              <ng-container
+                                *ngIf="
+                                  isRuleControllValid(item.get('maxDisscount'))
+                                "
+                              >
+                                <span
+                                  class="error text-danger"
+                                  *ngIf="
+                                    item.get('maxDisscount').errors?.required
+                                  "
+                                  >This field is required</span
+                                >
+                                <span
+                                  class="error text-danger"
+                                  *ngIf="
+                                    item.get('maxDisscount').errors?.number
+                                  "
+                                  >Please enter a numeric value.
+                                </span>
+                              </ng-container>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+                    <button type="button" class="add-more" (click)="addRules()">
+                      <i class="fa fa-plus" aria-hidden="true"></i> Add more
+                    </button>
+                  </p>
+                </div>
+                <div class="row" style="margin-top: 30px; margin-left: 5px">
+                  <div class="col-6">
+                    <button
+                      type="submit"
+                      class="btn btn-primary px-4"
+                      (click)="submit(formData.value)"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

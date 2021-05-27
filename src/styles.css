@@ -1,0 +1,74 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@media (min-width: 576px) {
+  .col-sm-12 {
+    padding-top: 5px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .col-sm-12 {
+    padding-top: 5px !important;
+  }
+  /* td > .form-group {
+    width: 100px;
+  } */
+}
+
+.multipal-searching .row {
+  padding-right: 20px !important;
+}
+
+.mat-sort-header-container {
+  justify-content: center !important;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+th.mat-header-cell {
+  text-align: center !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.btn-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-flex > i {
+  margin-right: 2px;
+}
+
+.mat-datepicker-input {
+  background-color: #fff !important;
+}
+.multipal-searching > form > div {
+  display: flex;
+  align-items: baseline;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.mt-25 {
+  margin-top: 25%;
+}
+
+.text-danger {
+  width: 100%;
+}
+
+.calender-filter {
+  position: relative;
+  top: -27px;
+  display: none;
+}

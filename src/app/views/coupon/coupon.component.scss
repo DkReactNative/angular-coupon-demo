@@ -1,0 +1,58 @@
+.example-form {
+  min-width: 150px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.example-half-width {
+  width: 50%;
+}
+
+.custom {
+  margin-top: 100px;
+}
+
+.mat-datepicker-input {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.label-rule {
+  font-weight: bold;
+  margin: 5px;
+}
+
+.card-padding {
+  padding: 10px;
+}
+
+.add-more {
+  color: white;
+  background-color: blue !important;
+  border: 1 pxsolid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: blue;
+  height: 39px;
+  margin-top: 10px;
+  float: right;
+}
+.remove {
+  color: white;
+  background-color: red !important;
+  border: 1 pxsolid;
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: blue;
+  height: 25px;
+  margin-top: 20px;
+  margin-right: 10px;
+  float: right;
+}
+.card-rule {
+  border: 1px solid blue;
+  margin-top: 5px;
+  border-radius: 10px;
+}
